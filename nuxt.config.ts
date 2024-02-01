@@ -2,6 +2,14 @@
 export default ({
   devtools: { enabled: true },
   modules: ["@nuxt/ui"],
+  head: {
+    script: [
+      {
+        src: 'https://www.youtube.com/iframe_api',
+        async: true,
+      },
+    ],
+  },
   routes: [
       {
         name: 'login',

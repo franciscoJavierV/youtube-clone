@@ -8,8 +8,8 @@ export default defineEventHandler(async(event) => {
   const runtimeConfig = useRuntimeConfig();
 
   const urlSearchParams = new URLSearchParams(event.path);
-  const searchParams = urlSearchParams.get('/api/youtube?search');
-
+  const videoId = urlSearchParams.get('/api/byId?id');
+  
   const {
      youtubeApiKey
   } = runtimeConfig.public
@@ -18,15 +18,14 @@ export default defineEventHandler(async(event) => {
       version: 'v3',
       auth: youtubeApiKey as unknown as string,
     });
-
+  
   try {
-    const response = await youtube.search.list({
-      part: ['snippet'],
-      q: searchParams?._value ?? searchParams as string,
-      maxResults: 25
+    const response = await youtube.videos.list({
+        part: ['snippet'],
+        id: videoId
     });
-
-    return response?.data?.items;
+    console.log("response", response?.data.items)
+    return response?.data.items;
   } catch (error) {
     console.error('Error al realizar la búsqueda:', error);
     throw error;
