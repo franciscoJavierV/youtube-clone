@@ -1,6 +1,6 @@
 <template>
   <div class="details-page">
-    <UButton @click="goBack" class="back-button">Volver</UButton>
+    <UButton @click="goBack" class="back-button">{{ $t("goBack") }}</UButton>
     <h1> {{ videos.title }}</h1>
     <br>
     <div class="video-container">
@@ -23,6 +23,9 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
+import { generateEmbed } from "../utils/embed"
+import  {ROUTES}  from "../../models/constants";
+
 const goBack = () => {
   navigateTo("/feed");
 };
@@ -33,11 +36,12 @@ const videoId = route.params.id;
 
 const youtubeEmbedUrl = ref("");
 onMounted(() => {
-  youtubeEmbedUrl.value = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=${window.location.origin}&controls=1&fs=1`;
+
+  youtubeEmbedUrl.value = generateEmbed(videoId);
 });
 
 const getVideoData = async () => {
-  const { data , error} = await useFetch("/api/byId", {
+  const { data , error} = await useFetch(ROUTES.getVideoById, {
     params: { id: videoId },
   });
 

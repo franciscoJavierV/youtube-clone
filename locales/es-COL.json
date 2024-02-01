@@ -1,0 +1,18 @@
+{
+  "title": "Vuejs youtube api",
+  "toast": {
+    "register":"Registro realizado correctamente",
+    "login":"Login realizado conrrectamente"
+  },
+  "login": {
+    "invalidEmail":"Email incorrecto",
+    "invalidPassword":"Contraseña incorrecta, minimo 6 caracteres",
+    "btn": "Ingresar"
+  },
+  "register": {
+    "button": "Registrarme"
+  },
+  "video": {
+    "Channel:": "Channel"
+  }
+}

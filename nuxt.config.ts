@@ -1,7 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default ({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui" , '@nuxtjs/i18n'],
+  i18n: {
+    lazy: true,
+    langDir: "locales",
+    strategy: "prefix_except_default",
+    locales: [{
+      code:"en-US",
+      iso:"en-US",
+      name:"English(US)",
+      file:"en-US.json",
+    }, {
+      code:"es-COL",
+      iso:"en-COL",
+      name:"Spanish(COL)",
+      file:"es-COL.json",
+    }],
+    defaultLocale: "en-US",
+  },
   head: {
     script: [
       {
@@ -10,6 +27,7 @@ export default ({
       },
     ],
   },
+
   routes: [
       {
         name: 'login',
@@ -34,11 +52,10 @@ export default ({
         measurementId: process.env.NUXT_FIREBASE_MEASUREMENTID,
         youtubeApiKey: process.env.NUXT_YOUTUBE_APIKEY
       },
-
     },
 
     routesRules: {
-      "./pages/feed.vue" : { ssr : false , isr:true }, //csr
+      "./pages/feed.vue" : { ssr :false , isr:true }, //csr
       "./pages/login.vue" : {ssr:false},
       "./pages/register" : { srr:false}
     }

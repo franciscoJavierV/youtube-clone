@@ -5,7 +5,7 @@
     </div>
     <p class="title">{{ item.snippet.title }}</p>
     <p class="description">{{ item.snippet.description }}</p>
-   <span class="channel"> Channel: {{ item.snippet.channelTitle }}</span>
+   <span class="channel">Channel:  {{ item.snippet.channelTitle }}</span>
   </div>
 </template>
 
@@ -26,12 +26,9 @@ const { item } = defineProps(["item"]);
   height: auto;
   transition: filter 0.3s ease;
 }
-
 .my-list-item:hover .thumbnail {
   filter: brightness(70%);
-}
-   
-
+} 
 .title {
   font-weight: bold;
   font-size: 12px;
