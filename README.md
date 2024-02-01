@@ -20,6 +20,14 @@ yarn install
 bun install
 ```
 
+## About
+try to use ssr and csr
+added some comments just to explain weird code and describe @todos
+auth middleware just to learn similar to express js 
+private page with login feature 
+custom pluggin to ensure firebase conection
+env variables 
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:

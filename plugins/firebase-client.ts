@@ -1,14 +1,11 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
-import type { FirebaseConfig } from "~/models/firebase";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import type { FirebaseConfig } from "../models/firebase";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export default defineNuxtPlugin((nuxtApp) => {
+
+    const runtimeConfig = useRuntimeConfig();
 
     const {
         apiKey,
@@ -18,10 +15,10 @@ export default defineNuxtPlugin((nuxtApp) => {
         messagingSenderId,
         appId,
         measurementId
-    } = useRuntimeConfig().public as unknown as FirebaseConfig
+    } = runtimeConfig.public
 
-    const firebaseConfig = {
-     apiKey,
+    const firebaseConfig:FirebaseConfig  = {
+    apiKey,
       authDomain,
       projectId,
       storageBucket,
@@ -34,6 +31,13 @@ export default defineNuxtPlugin((nuxtApp) => {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth()
     
+    onAuthStateChanged(auth ,(user)=> {
+        if(user){
+            const uuid = user.uid;
+
+        }
+    })
+
     return {
         provide: {
             auth,

@@ -16,7 +16,6 @@ const state = ref({
 })
 
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
-    console.log(event.data)
     const { email , password} = event.data
     try {
         const res = await login(email, password)

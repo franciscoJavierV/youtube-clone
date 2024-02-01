@@ -1,11 +1,14 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, type Auth } from "firebase/auth"
 
 export const useFirebaseAuth = () => {
-    const {$auth} = useNuxtApp()
+    const { $auth } = useNuxtApp()
+
+    //just trying to keep typed variables
+    const firebaseAuth: Auth = $auth as unknown as Auth 
 
     const register = async (email:string, password: string) => {
         try {
-            const credential = await createUserWithEmailAndPassword($auth, email,password)
+            const credential = await createUserWithEmailAndPassword(firebaseAuth, email,password)
             const registerUser = credential.user
             return registerUser
         } catch (err) {
@@ -16,24 +19,37 @@ export const useFirebaseAuth = () => {
     
     const login = async (email:string , password:string) => {
         try {
-            const loggetUser = await signInWithEmailAndPassword($auth, email, password)
+            const loggetUser = await signInWithEmailAndPassword(firebaseAuth, email, password)
             return loggetUser.user
         } catch (error) {
             console.error(error)
         }
     }
 
-    const logout = async (email:string , password:string) => {
+    const logout = async () => {
         try {
-            await $auth.signOut();
+            await firebaseAuth.signOut();
+            navigateTo("/login")
         } catch (error) {
             console.error(error)
         }
     }
 
+    const currentUserPromise = () => new Promise((resolve) => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+            unsubscribe()
+            resolve(user);
+        },)
+    })
+
+    const infoUser = firebaseAuth.currentUser
+   
 
     return {
+        currentUserPromise,
         register,
-        login
+        login,
+        logout,
+        infoUser,
     }
 }
