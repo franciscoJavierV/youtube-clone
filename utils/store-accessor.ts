@@ -1,11 +1,11 @@
 import { Store } from 'vuex'
 import { getModule } from 'vuex-module-decorators'
-import Example from '@/store/example'
+import Video from '../store/video-data'
 
-let example: Example
+let videoModule: Video
 
 function initializeStores(store: Store<any>): void {
-  example = getModule(Example, store)
+  videoModule = getModule(Video, store)
 }
 
-export { initializeStores, example }
+export { initializeStores, Video }
