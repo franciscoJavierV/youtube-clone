@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ROUTES, placeholder } from '../../models/constants';
-import VideoList from '~/components/Video-list.vue';
 definePageMeta({
   middleware: "auth",
   layout:"session"
