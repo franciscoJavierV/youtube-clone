@@ -1,0 +1,25 @@
+{
+  "title": "Vuejs youtube api",
+  "toast": {
+    "register": "Registration successfully completed",
+    "login": "Login successfully completed"
+  },
+  "login": {
+    "invalidEmail": "Incorrect email",
+    "invalidPassword": "Incorrect password, minimum 6 characters",
+    "btn": "Login",
+    "email": "email",
+    "password": "password"
+  },
+  "register": {
+    "button": "Register"
+  },
+  "youtube": "https://www.youtube.com/embed/{video}?enablejsapi=1&origin==${window}&controls=1&fs=1",
+  "video": {
+    "Channel:": "Channel",
+    "goBack":"Go back",
+    "goOut":"Go out",
+    "search":"Search",
+    "welcome":" Just for you  {name}"
+  }
+}

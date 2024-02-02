@@ -1,6 +1,7 @@
 // youtubeService.js
 
 import { google, youtube_v3 } from 'googleapis';
+import { ERRORS } from '~/models/constants';
 
 export default defineEventHandler(async(event) => {
   let youtube: youtube_v3.Youtube;
@@ -24,10 +25,9 @@ export default defineEventHandler(async(event) => {
         part: ['snippet'],
         id: videoId
     });
-    console.log("response", response?.data.items)
     return response?.data.items;
   } catch (error) {
-    console.error('Error al realizar la búsqueda:', error);
+    console.error(ERRORS.searchError, error);
     throw error;
   }
 })

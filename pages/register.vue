@@ -2,9 +2,8 @@
 import { z } from 'zod';
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 const {  register }  = useFirebaseAuth()
-const toast = useToast()
 const schema = z.object({
-    email: z.string().email('Invalid email'),
+    email: z.string().email(''),
     password: z.string().min(6, 'Min 6 characters'),
     name: z.string()
 })
@@ -20,14 +19,8 @@ const state = ref({
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
     const { email , password} = event.data
     try {
-        const res = await register(email, password)
-        toast.add({
-            title:'Registro realizado correctamente',
-            timeout: 2000,
-            callback: async () => {
-                await navigateTo( {name :'login' })
-            }
-        })
+    await register(email, password)
+     
     } catch (error) {
         console.error(error)
     }
@@ -37,26 +30,23 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
     <UForm
         :schema="schema"
         :state="state"
-        @submit.prevent="handleSubmit" 
+        @submit="handleSubmit" 
         class="max-w-sm mx-auto"   
     >
     <div class="mb-5">
         <UFormGroup >
             <UInput class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" type="text" placeholder="Nombre de usuario" v-model.trim="state.name" />
         </UFormGroup>
-        <UFormGroup @submit.prevent="handleSubmit">
+        <UFormGroup >
             <UInput class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" type="email" placeholder="email" v-model.trim="state.email" />
         </UFormGroup>
         <UFormGroup>
             <UInput class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" type="password" placeholder="password" v-model.trim="state.password" />     
         </UFormGroup>
-        <UButton type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Registrarme
+        <UButton   @submit="handleSubmit" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            {{ $t("register.button")}}
         </UButton>
-
     </div>
-       
-
     </UForm>
 </template>
 

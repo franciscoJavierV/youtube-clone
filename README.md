@@ -1,11 +1,8 @@
 # Nuxt UI Minimal Starter
 
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
-
 ## Setup
 
 Make sure to install the dependencies:
-
 ```bash
 # npm
 npm install
@@ -19,6 +16,10 @@ yarn install
 # bun
 bun install
 ```
+
+## See this app running at: 
+
+https://youtubefran.vercel.app/
 
 ## About
 try to use ssr and csr
@@ -46,24 +47,6 @@ yarn dev
 bun run dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
 Locally preview production build:
 
 ```bash
@@ -79,5 +62,3 @@ yarn preview
 # bun
 bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

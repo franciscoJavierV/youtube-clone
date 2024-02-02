@@ -7,11 +7,24 @@ export const useFirebaseAuth = () => {
     const firebaseAuth: Auth = $auth as unknown as Auth 
 
     const register = async (email:string, password: string) => {
+        const toast = useToast()
         try {
             const credential = await createUserWithEmailAndPassword(firebaseAuth, email,password)
             const registerUser = credential.user
+            toast.add({
+                title:  'register.successMessage',
+                timeout: 2000,
+                callback: async () => {
+                    await navigateTo('login')
+                }
+            })
             return registerUser
         } catch (err) {
+            toast.add({
+                title: 'register.error',
+                timeout: 2000,
+             
+            })
             //should use a console provider or/and datadog 
             console.error(err)
         }
@@ -35,6 +48,7 @@ export const useFirebaseAuth = () => {
         }
     }
 
+    //-- handling 
     const currentUserPromise = () => new Promise((resolve) => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
             unsubscribe()
