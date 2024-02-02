@@ -19,7 +19,8 @@
     "types": [
       "@nuxt/types",
       "@types/node",
-      "@nuxtjs/axios"
+      "@nuxtjs/axios",
+      "vitest/globals"
     ]
   },
   "exclude": ["node_modules"],
